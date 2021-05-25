@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+      <title>Web Spring</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    
+    <div class="jumbotron text-center">
+      <h1>Pagina para almacenar usuario con sus correos</h1>
+      <p>Para la asignatura de Cloud Computing</p> 
+    </div>
+   
+    
+    <body>
+        <p th:text="${mensaje}"></p>
+
+        <p><a th:href="@{/add}">Añadir Usuario</a></p>
+       
+       <table class="table" th:if="${usuarios!=null and !usuarios.empty}">
+    	<tr>
+    	  <th scope="col">Nombre</th>
+    	  <th scope="col">Correo</th>
+    	  <th scope="col">Acciones</th>
+    	</tr>
+    	<tr th:each="usuario : ${usuarios}">
+          <td th:text="${usuario.nombre}">Nombre Persona</td>
+    	  <td th:text="${usuario.email}">Correo Persona</td>
+    	  <td>
+    	      <a th:href="@{/edit/} + ${usuario.id}" th:text="Editar">Editar</a> | 
+    	      <a th:href="@{/delete(id=${usuario.id})}" th:text="Eliminar">Eliminar</a>
+    	  </td>
+    	</tr>
+    	</table>
+    	<p th:if="${usuarios==null or usuarios.empty}">No hay usuarios</p>	
+	
+	</body>
+</html>
+
